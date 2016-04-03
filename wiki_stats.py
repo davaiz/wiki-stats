@@ -126,28 +126,7 @@ def analyse_redirects(G):
             break
     print("Статья с наибольшим количеством внешних перенаправлений:",  G.get_title(found_id))
     print("Среднее количество внешних перенаправлений на статью: %0.2f  (ср. откл. : %0.2f)" %(statistics.mean(redirects_to), statistics.stdev(redirects_to)))
-
-def dejkstra(G, start):
-    shortest_path={vertex:int('50000') for vertex in G}
-    shortest_path[start] = 0
-    queue = [start]
-    while queue:
-        current=queue.pop(0)
-        for neighbour in G[current]:
-            offering_shortest_path = shortest_path[current]+(G[current][neighbour])
-            if offering_shortest_path < shortest_path[neighbour]:
-                shortest_path[neighbour]=offering_shortest_path
-                queue.append(neighbour)
-    return shortest_path
-
-def hist(fname, data, bins, xlabel, ylabel, title, facecolor='green', alpha=0.5, transparent=True, **kwargs):
-    plt.clf()
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.title(title)
-    plt.hist(x=data, bins=bins, facecolor=facecolor, alpha=alpha, **kwargs)
-    plt.savefig(fname, transparent=transparent)
-
+    
 if __name__ == '__main__':
     wg = WikiGraph()
     wg.load_from_file('wiki_small.txt')
@@ -155,12 +134,6 @@ if __name__ == '__main__':
     analyse_links_from_page(wg,)
     analyse_links_to_page(wg)
     analyse_redirects(wg)
-    hist(fname='1.png', data=[wg.get_number_of_links_from(i) for i in range(1211)],bins=200,xlabel='Количество статей', ylabel="Количество ссылок", title="Распределение количества ссылок из статьи")
-    #hist(fname='2.png', data=[wg. for i in range(1211)], bins=200, xlabel='Количество статей', ylabel="Количество ссылок", title="Распределение количества ссылок на статью")
-   # hist(fname='3.png', data=[wg. for i in range(1211)], bins=50, xlabel='Количество статей', ylabel="Количество ссылок", title="Распределение количества редиректов на статью")
-    hist(fname='4.png', data=[wg._sizes[i] for i in range(1211)], bins=50, xlabel='Количество статей', ylabel="Количество ссылок", title="Распределение размеров статей")
-    hist(fname='5.png', data=[wg._sizes[i] for i in range(1211)], bins=50, xlabel='Количество статей', ylabel="Количество ссылок", title="Распределение размеров статей (log)", log=True)
-
-
+   
 
 
