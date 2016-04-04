@@ -7,7 +7,7 @@ import array
 import statistics
 
 from matplotlib import rc
-rc('font', family='DejaVu Sans', weight='normal', size=14)
+rc('font', family='Droid Sans', weight='normal', size=14)
 
 import matplotlib.pyplot as plt
 
